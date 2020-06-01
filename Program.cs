@@ -10,6 +10,9 @@ namespace ConsoleAppPractice
         {
             Console.WriteLine("This is DB practice session..");
             Console.WriteLine("Press 1 for Binary search tree");
+            Console.WriteLine("Press 2 for two sum problem");
+            Console.WriteLine("Press 3 for Maximum Area Cake problem");
+
             Console.WriteLine("Press x to exit");
             bool isContinue = true;
             do
@@ -28,6 +31,12 @@ namespace ConsoleAppPractice
                         case 1:
                             BinarySearchOperations();
                         break;
+                        case 2:
+                            RandomProblems.TwoSumProblem();
+                            break;
+                        case 3:
+                            MaximumAreaCake.MaximumAreaCakeCaller();
+                            break;
                     }
                 }
             } while (isContinue);
