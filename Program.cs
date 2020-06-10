@@ -14,6 +14,8 @@ namespace ConsoleAppPractice
             Console.WriteLine("Press 3 for Maximum Area Cake problem");
             Console.WriteLine("Press 4 for Find Inflection point.");
             Console.WriteLine("Press 5 for Max heap.");
+            Console.WriteLine("Press 6 for Longest substring.");
+            Console.WriteLine("Press 7 for Reverse linked list.");
 
             Console.WriteLine("Press x to exit");
             bool isContinue = true;
@@ -44,6 +46,13 @@ namespace ConsoleAppPractice
                             break;
                         case 5:
                             MaxHeap.Test();
+                            break;
+
+                        case 6:
+                            LongestSubstring.Test();
+                            break;
+                        case 7:
+                            ReverseListSolution.Test();
                             break;
                     }
                 }
