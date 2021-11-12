@@ -10,6 +10,24 @@ namespace ConsoleApp
     /// </summary>
     public class MaxHeap
     {
+        public int Count { get; private set; }
+
+        int[] Data = new int[10];
+
+        public MaxHeap() : this(null)
+        {
+
+        }
+
+        public MaxHeap(int[] data)
+        {
+            if (data != null)
+            {
+                this.Data = data;
+                Count = data.Length;
+            }
+        }
+
         public int ParentIndex(int index)
         {
             return (index - 1) / 2;
@@ -25,69 +43,80 @@ namespace ConsoleApp
             return 2 * pIndex + 2;
         }
 
-        public void Swap(int[] dataArray, int index1, int index2)
+        public void Swap(int index1, int index2)
         {
-            int data = dataArray[index1];
-            dataArray[index1] = dataArray[index2];
-            dataArray[index2] = data;
+            int data = Data[index1];
+            Data[index1] = Data[index2];
+            Data[index2] = data;
         }
 
 
-
-        public void Heapify(int[] dataArry, int size, int startIndex = -1)
+        public void HeapifyUp(int index = -1)
         {
-            if (startIndex == -1)
+            if (index == -1)
             {
-                startIndex = size -1;
+                index = Count - 1;
             }
 
-            if (startIndex >= 1 && startIndex < size)
+            if (index >= 1)
             {
-                int pi = ParentIndex(startIndex);
+                int pi = ParentIndex(index);
                 int rci = RightChildIndex(pi);
                 int lci = LeftChildIndex(pi);
-                int mci = rci < size && dataArry[rci] > dataArry[lci] ?  rci : lci;
-                if (dataArry[pi] < dataArry[mci])
+                int mci = rci < Count && Data[rci] > Data[lci] ? rci : lci;
+                if (Data[pi] < Data[mci])
                 {
-                    Swap(dataArry, pi, mci);
-                    HeapifyDown(dataArry, size, mci);
+                    Swap(pi, mci);
+                    HeapifyDown(mci);
                 }
 
-                Heapify(dataArry, size, lci-1);
+                HeapifyUp(lci - 1);
             }
         }
 
-        private void HeapifyDown(int[] dataArry, int size,int pi)
+        private void HeapifyDown(int pi)
         {
             int rci = RightChildIndex(pi);
             int lci = LeftChildIndex(pi);
-            if (pi < size && lci < size)
+            if (lci < Count)
             {
-                int mci = rci < size && dataArry[rci] > dataArry[lci] ? rci : lci;
-                if (dataArry[pi] < dataArry[mci])
+                int mci = rci < Count && Data[rci] > Data[lci] ? rci : lci;
+                if (Data[pi] < Data[mci])
                 {
-                    Swap(dataArry, pi, mci);
-                    HeapifyDown(dataArry, size, mci);
+                    Swap(pi, mci);
+                    HeapifyDown(mci);
                 }
             }
         }
 
         public static void Test()
         {
-            var input = new int[] { 10, 11, 3, 1, 2, 16, 100, 88, 17 };
-            var input2 = new int[] { 4, 10, 3, 5, 1 };
-            var input3 = new int[] { 1, 3, 5, 4, 6, 13, 10, 9, 8, 15, 17 };
-            ProcessAndDisplayResult(input);
-            ProcessAndDisplayResult(input2);
-            ProcessAndDisplayResult(input3);
+            for (int cnt = 0; cnt < 5; cnt++)
+            {
+                var random = new Random();
+                var input = new int[10];
+                for (int i = 0; i < 10; i++)
+                {
+                    input[i] = random.Next(0, 20);
+                    
+                }
+                var maxHeap = new MaxHeap(input);
+                maxHeap.HeapifyUp();
+                while (maxHeap.Count > 0)
+                {
+                    Console.Write($" {maxHeap.Pop()} ->");
+                }
+
+                Console.WriteLine();
+            }
         }
 
-        private static void ProcessAndDisplayResult(int[] input)
+        private int Pop()
         {
-            Console.WriteLine($"Input : {string.Join(" , ", input)}");
-            var maxHeap = new MaxHeap();
-            maxHeap.Heapify(input, input.Length);
-            Console.WriteLine($"Max Heap : {string.Join(" , ", input)}");
+            var max = Data[0];
+            Data[0] = Data[--Count];
+            HeapifyDown(0);
+            return max;
         }
     }
 }

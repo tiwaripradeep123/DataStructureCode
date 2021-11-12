@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Reflection.Emit;
 using System.Text;
 
-namespace ConsoleApp
+namespace ConsoleApp.Queue
 {
     public class Queue<T>
     {

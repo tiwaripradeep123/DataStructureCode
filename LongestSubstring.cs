@@ -44,13 +44,14 @@ namespace ConsoleApp
                 int startIndex = 0;
                 for (int i = 0; i < s.Length; i++)
                 {
-                    if (flags.ContainsKey(s[i]) && flags[s[i]] >= startIndex)
+                    var key = s[i];
+                    if (flags.ContainsKey(key) && flags[key] >= startIndex)
                     {
                         result = result < i - startIndex ? i - startIndex : result;
-                        startIndex = flags[s[i]] + 1;
+                        startIndex = flags[key] + 1;
                     }
 
-                    flags[s[i]] = i;
+                    flags[key] = i;
                 }
 
                 return result > s.Length - startIndex ? result : s.Length - startIndex;

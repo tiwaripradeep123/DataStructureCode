@@ -1,0 +1,40 @@
+﻿{
+  {
+    "boardId": "NCRK8ls7DQqK",
+    "items": [
+      {
+        "text": "# Bike Rental Shop\nYou've been hired by a bike shop to create software to help them with their rental operation. This includes automating activities such as keeping track of inventory, customers, stock items that are rented, customer fee accrual etc. \n\nThe store rents two types of products:\n- Bikes\n  - Bikes come in 3 sizes, Small, Medium & Large\n- Scooters\n  - Scooters come in 2 types: Electric & Gas\n\nEach bike is made in one of three different sizes, Small, Medium, Large.\nFor different size people; think Children, Adults, and Big Adults. We'd like to be sure our customers get a bike that fits them and will need to track size of our bikes.\nThe scooters are available in electric motor or gas motor styles, The styles of scooters are very different so we want to track them separately so we can match our customers needs to the appropriate scooter.\n\nRequired Queries:\n- What small bikes do you have? // how many ?\n- What products are there for rent? // avaiable for rent at this time, detailed view \n- Does this customer have a balance? (aka owe us money)\n- What products are rented?\n- Are there products that are overdue for return? Who has them? // how to identify if its overdue Default return time = x days, Don`t allow to rent them anything till the balance is cleared. \n- What products does a customer have rented?\n\nRequired commands:\n- Add a product to inventory\n- Add a customer\n- Remove a product from inventory (permanently not for rental, i.e. it’s been damaged) // DELETE\n- Record that a product is rented to a customer\n- Create a charge for the customer\n\n-- Customer rented history\n-- Notify user about overdue item(s)\n-- \n\n\n### Deliverables:\nCan include but not limited to:\n- Class diagrams\n- API spec\n- Schema/Data Model design\n- Sequence diagram(Optional)\n\n",
+        "elementType": "noteitem",
+        "shape": "-308,-94,876,749",
+        "backgroundColor": "204,204,255,0:51,51,51,1",
+        "textColor": "51,51,51,1",
+        "props": 66048,
+        "version": 7,
+        "id": 0,
+        "clientId": "2-1",
+        "cd": "",
+        "rdeg": 0,
+        "crc": 476925835
+      }
+    ]
+  },
+  {
+    "boardId": "NCRK8ls7DQqK",
+    "items": [
+      {
+        "text": "1. POST Https://BikeShop.com/Product/AddInventory/{ProuductID}\n   {\n      count :int \n   }\n   \n  POST Https://BikeShop.com/Product/IncrementAvailability/{ProuductID}\n   {\n      count :int \n   }\n   \n 2. POST Https://BikeShop.com/Customer\n request {\n  name, phoneno. \n }\n \n  Get Https://BikeShop.com/Customer?name={name}, phoneno={phoneno.}\n Response {\n CustomerId\n  name, phoneno. \n }\n\n GET Https://BikeShop.com/Product?name={productname}\n Response [\n {\n  productid,\n  name, \n  SubType, \n  AvailableCount \n }\n ]\n \n  GET Https://BikeShop.com/Product?name={productname},Available={true}\n Response [\n  {\n  productid,\n  name, \n  SubType, \n  AvailableCount\n }\n ]\n \n Https://BikeShop.com/CheckOut\n {\n  1. if there is any past due - \n }\n request {\n     DateRented\nDateDue\nProductId\nCustomerId\nRentalRateId\n }\n \n Response: RentedInventoryId\n \nGET: Https://BikeShop.com/RentalRates?productID = {productId}\n[\n{\n    1/daily \n    1w\n    1m \n}\n]\nHttps://BikeShop.com/Charges/RentedInventoryId?ReturnedDate={date/Today}\n{\n   cost:\n}\n\n\nHttps://BikeShop.com/Return/RentedInventoryId\n{\n   1. Move that entry to RentedHistory\n   2. Https://BikeShop.com/Product/IncrementAvailability/{ProuductID} {count:1}\n   3. \n}\n\nRentalHistory/{userId}\n[\n {\n   \n }\n]\n\nCurrentRental/{userId}\n[\n {\n   \n }\n]\n\n",
+        "elementType": "noteitem",
+        "shape": "-324,715,1296,1437",
+        "backgroundColor": "204,204,255,0:51,51,51,1",
+        "textColor": "51,51,51,1",
+        "props": 66048,
+        "version": 7,
+        "id": 0,
+        "clientId": "2-3",
+        "cd": "",
+        "rdeg": 0,
+        "crc": 923845313
+      }
+    ]
+  }
+}

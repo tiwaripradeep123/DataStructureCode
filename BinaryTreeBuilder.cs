@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QueueNS = ConsoleApp.Queue;
+using System;
 using System.Collections.Generic;
 
 namespace ConsoleApp
@@ -55,14 +56,14 @@ namespace ConsoleApp
                 return;
             }
 
-            Queue<KeyValuePair<BinaryTree, int>> binaryTreeQueue = new Queue<KeyValuePair<BinaryTree, int>>();
+            QueueNS.Queue<KeyValuePair<BinaryTree, int>> binaryTreeQueue = new QueueNS.Queue<KeyValuePair<BinaryTree, int>>();
             binaryTreeQueue.Push(new KeyValuePair<BinaryTree, int>(binaryTree, level));
 
             PrintBinaryTreeRecursive(binaryTreeQueue);
 
         }
 
-        public static void PrintBinaryTreeRecursive(Queue<KeyValuePair<BinaryTree, int>> binaryTreeQueue)
+        public static void PrintBinaryTreeRecursive(QueueNS.Queue<KeyValuePair<BinaryTree, int>> binaryTreeQueue)
         {
             if (binaryTreeQueue.Peek().Key != null)
             {
